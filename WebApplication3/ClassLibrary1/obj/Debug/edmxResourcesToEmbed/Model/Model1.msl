@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SMModelStoreContainer" CdmEntityContainer="SMEntities">
+    <EntitySetMapping Name="SharedComments">
+      <EntityTypeMapping TypeName="SMModel.SharedComment">
+        <MappingFragment StoreEntitySet="SharedComment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SharedId" ColumnName="SharedId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserFriends">
+      <EntityTypeMapping TypeName="SMModel.UserFriend">
+        <MappingFragment StoreEntitySet="UserFriend">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Userrs">
+      <EntityTypeMapping TypeName="SMModel.Userr">
+        <MappingFragment StoreEntitySet="Userr">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserShareds">
+      <EntityTypeMapping TypeName="SMModel.UserShared">
+        <MappingFragment StoreEntitySet="UserShared">
+          <ScalarProperty Name="SharedTime" ColumnName="SharedTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SharedDetails" ColumnName="SharedDetails" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

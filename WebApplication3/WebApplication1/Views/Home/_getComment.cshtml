@@ -1,0 +1,45 @@
+﻿@model WebApplication1.Models.HomeModel_.Comment
+<table>
+    @foreach (var item in Model.C)
+    {
+        <tr>
+
+            <td>@item.Userr.Name</td>
+            <td>@item.Comment</td>
+        </tr>
+    }
+    <tr>
+        <td><input type="text" id="comment" placeholder="Comment" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><a href="javascript:AddnewComment(@Model.id);">AddNewComment</a></td>
+    </tr>
+
+</table>
+
+
+<script>
+    function AddnewComment(Id) {
+
+        $.ajax({
+            url: '@Url.Action("AddnewComment", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                "id": Id,
+                "comment": $("#comment").val()
+            },
+            success: function (data) {
+
+
+                window.location.assign("../Home/Index");
+
+            },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+</script>

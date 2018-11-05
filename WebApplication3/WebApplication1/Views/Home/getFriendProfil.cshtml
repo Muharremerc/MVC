@@ -1,0 +1,46 @@
+﻿@model WebApplication1.Models.HomeModel_.HomeModel 
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>getFriendProfil</title>
+</head>
+<body>
+    <table border="1">
+        @foreach (var item in Model.F)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Surname
+                </td>
+            </tr>
+        }
+
+    </table>
+    <table border="1">
+        @foreach (var item in Model.S)
+        {
+        <tr>
+            <td>
+                @item.Name @item.Surname
+            </td>
+            <td>
+                @item.Surname
+            </td>
+            <td>
+                @item.Time
+
+            </td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>

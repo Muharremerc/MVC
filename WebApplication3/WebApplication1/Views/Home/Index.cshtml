@@ -1,0 +1,317 @@
+﻿@model WebApplication1.Models.HomeModel_.HomeModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="../../Content/https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="../../Content/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="../../Content/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="../../Content/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="../../Content/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="../../Content/css/style.css" />
+    <title>Index</title>
+
+</head>
+<body>
+    <div>
+        <table border="2">
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td><input type="text" id="username" /></td>
+                            <td><input type="text" id="password" /></td>
+                            <td><a href="javascript:Login()">Login</a>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>Name <input type="text" id="nName" /></td>
+                            <td>Surname <input type="text" id="nSurname" /></td>
+                            <td>Username <input type="text" id="nUsername" /></td>
+                            <td>Password<input type="text" id="nPassword" /></td>
+                            <td><a href="javascript:AddNewUser()">Add User</a>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            @if (Model != null)
+            {
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Add New Friend</td>
+                                <td><input type="text" id="AddFriend" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a href="javascript:AddFriend()">Add</a>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table border="1">
+                            <tr>
+                                <td colspan="2" align="center">My Friend List</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>Surname</td>
+                            </tr>
+                            @foreach (var item in Model.F)
+                            {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Surname</td>
+                                <td><a href="javascript:getFriendProfil(@item.Id)">Get Friend Profile</a></td>
+                            </tr>
+                            }
+                        </table>
+                    </td>
+                    <td>
+
+                        <table border="1">
+                            <tr>
+                                <td colspan="2">
+                                    My Friend Shared
+                                </td>
+                            </tr>
+                        </table>
+                        @foreach (var item in Model.S)
+                        {
+                        <table border="1">
+
+                            <tr>
+                                <td>@item.Name @item.Surname</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">@item.Details</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">@item.Time</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a href="javascript:getComment(@item.Id)">Get Comment</a>
+
+                            </tr>
+
+                        </table>
+
+                            <div id="@item.Details" name="@item.Details">
+
+                            </div>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Add New Details</td>
+                                <td><input type="text" id="shared" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a href="javascript:AddDetails()">Add</a>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+
+            }
+
+        </table>
+
+           
+
+
+
+
+    </div>
+    <div id="a" name="a">
+
+
+    </div>
+
+    <script src="../../Content/js/jquery.min.js"></script>
+    <script src="../../Content/js/bootstrap.min.js"></script>
+    <script src="../../Content/js/slick.min.js"></script>
+    <script src="../../Content/js/nouislider.min.js"></script>
+    <script src="../../Content/js/jquery.zoom.min.js"></script>
+    <script src="../../Content/js/main.js"></script>
+</body>
+
+</html>
+
+
+<script>
+    function getComment(Id) {
+
+        $.ajax({
+            url: '@Url.Action("getComment", "Home")',
+            type: 'POST',
+            dataType: 'HTML',
+            data: {
+                "id": Id
+            },
+            success: function (data) {
+                $("#a").html(null);
+                $("#a").html(data);
+
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+
+        function Login() {
+
+        $.ajax({
+            url: '@Url.Action("Login", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                "username": $("#username").val(),
+                "password": $("#password").val()
+            },
+            success: function (data) {
+
+                window.location.assign("../Home/Index");
+
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+    function AddDetails() {
+
+        $.ajax({
+            url: '@Url.Action("Shared", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                "shared": $("#shared").val()
+            },
+            success: function (data) {
+
+                window.location.assign("../Home/Index");
+
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+
+    function AddFriend() {
+
+        $.ajax({
+            url: '@Url.Action("AddFriend", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                "friend": $("#AddFriend").val()
+            },
+            success: function (data) {
+
+                window.location.assign("../Home/Index");
+                alert(data);
+
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+    function AddNewUser() {
+
+        $.ajax({
+            url: '@Url.Action("AddNewUser", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                "name": $("#nName").val(),
+                "username": $("#nUsername").val(),
+                "password": $("#nPassword").val(),
+                "surname": $("#nSurname").val()
+            },
+            success: function (data) {
+
+                window.location.assign("../Home/Index");
+                alert(data);
+
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+
+
+    function getFriendProfil(id) {
+
+        $.ajax({
+            url: '@Url.Action("getFriendProfil", "Home")',
+            type: 'POST',
+            dataType: 'html',
+            data: {
+                "id": id
+            },
+            success: function (data) {
+                window.location.assign("../Home/getFriendProfil/" + id);
+             },
+             error: function (hata, ajaxOptions, thrownError) {
+                 alert(hata.status);
+                 alert(thrownError);
+                 alert(hata.responseText);
+             }
+            });
+    }
+    
+
+
+    
+
+
+</script>

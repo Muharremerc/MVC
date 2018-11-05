@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SharedComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SharedId" Type="int" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="UserFriend">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="FriendId" Type="int" />
+  </EntityType>
+  <EntityType Name="Userr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserShared">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="SharedDetails" Type="nvarchar(max)" />
+    <Property Name="SharedTime" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_SharedComment_Userr">
+    <End Role="Userr" Type="Self.Userr" Multiplicity="0..1" />
+    <End Role="SharedComment" Type="Self.SharedComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Userr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SharedComment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SharedComment_UserShared">
+    <End Role="UserShared" Type="Self.UserShared" Multiplicity="0..1" />
+    <End Role="SharedComment" Type="Self.SharedComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserShared">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SharedComment">
+        <PropertyRef Name="SharedId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserFriend_Userr">
+    <End Role="Userr" Type="Self.Userr" Multiplicity="0..1" />
+    <End Role="UserFriend" Type="Self.UserFriend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Userr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserFriend">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserFriend_Userr1">
+    <End Role="Userr" Type="Self.Userr" Multiplicity="0..1" />
+    <End Role="UserFriend" Type="Self.UserFriend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Userr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserFriend">
+        <PropertyRef Name="FriendId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserShared_Userr">
+    <End Role="Userr" Type="Self.Userr" Multiplicity="0..1" />
+    <End Role="UserShared" Type="Self.UserShared" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Userr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserShared">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SMModelStoreContainer">
+    <EntitySet Name="SharedComment" EntityType="Self.SharedComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserFriend" EntityType="Self.UserFriend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Userr" EntityType="Self.Userr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserShared" EntityType="Self.UserShared" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SharedComment_Userr" Association="Self.FK_SharedComment_Userr">
+      <End Role="Userr" EntitySet="Userr" />
+      <End Role="SharedComment" EntitySet="SharedComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SharedComment_UserShared" Association="Self.FK_SharedComment_UserShared">
+      <End Role="UserShared" EntitySet="UserShared" />
+      <End Role="SharedComment" EntitySet="SharedComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserFriend_Userr" Association="Self.FK_UserFriend_Userr">
+      <End Role="Userr" EntitySet="Userr" />
+      <End Role="UserFriend" EntitySet="UserFriend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserFriend_Userr1" Association="Self.FK_UserFriend_Userr1">
+      <End Role="Userr" EntitySet="Userr" />
+      <End Role="UserFriend" EntitySet="UserFriend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserShared_Userr" Association="Self.FK_UserShared_Userr">
+      <End Role="Userr" EntitySet="Userr" />
+      <End Role="UserShared" EntitySet="UserShared" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

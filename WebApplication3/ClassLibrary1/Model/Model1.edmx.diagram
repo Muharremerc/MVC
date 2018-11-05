@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b69902f18f44b0fa0dabc0104053216" Name="Diagram1">
+        <EntityTypeShape EntityType="SMModel.SharedComment" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.UserFriend" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Userr" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.UserShared" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="SMModel.FK_SharedComment_Userr" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_SharedComment_UserShared" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_UserFriend_Userr" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_UserFriend_Userr1" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_UserShared_Userr" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
